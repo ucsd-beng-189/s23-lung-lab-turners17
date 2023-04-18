@@ -64,7 +64,7 @@ VA=VAbar*(a1*beta+av*(1-beta)); % alveolar ventilation based on random distribut
 Q = Qbar*(a2*beta+av*(1-beta)); % perfustion based on random distribution a2, expected perfusion per alveolus, and heterogeneity parameter
 r=VA./Q; % ventilation perfusion ratio
 figure(1)
-plot(Q,VA,'.') % ventilation perfusion ratio
+plot(Q,VA,'.') % ventilation perfusion 
 
 %find actual values of 
 %VAtotal, Qtotal, VAbar, and Qbar:
