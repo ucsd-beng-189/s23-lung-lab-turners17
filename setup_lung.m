@@ -17,7 +17,7 @@ cref=0.2/(22.4*(310/273))
 %
 %oxygen concentration in the inspired air:
 % 
-cI=cref
+%cI=cref
 %
 %blood oxygen concentration
 %at full hemoglobin saturation: 
@@ -26,7 +26,7 @@ cstar=cref
 %in blood expressed in moles/liter)
 %
 %rate of oxygen consumption (moles/minute):
-% M=0.25*cref*5.6
+M=0.25*cref*5.6
 %
 %oxygen partial pressure 
 %at which hemoglobin is half-saturated:

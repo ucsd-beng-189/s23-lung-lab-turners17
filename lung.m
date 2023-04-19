@@ -71,3 +71,41 @@ for beta=0:0.1:1
 end
 figure(4)
 plot([0:0.1:1],betasucc,'-')
+
+%% Task 5 
+%filename: lung.m (main program)
+
+clear all
+clf
+beta=0.5;
+global Pstar cstar n maxcount M Q camax RT cI;
+
+cref=0.2/(22.4*(310/273));
+
+for cI=cref:-0.0002:0.00325
+    setup_lung
+    cvsolve
+    outchecklung
+    figure(4)
+    plot(cI,PAbar,'go')
+    hold on
+    plot(cI,Pabar,'bo')
+    plot(cI,Pv,'ko')
+
+    legend('mean alveolar','mean arterial','venous')
+    title('Partial Pressure vs Oxygen Concentration in Inspired Air')
+    xlabel('Oxygen Concentration of Inspired Air')
+    ylabel('Partial Pressure')
+    axis([0.0032 0.008 0 105])
+
+    figure(5)
+    plot(cI,cAbar,'go')
+    hold on
+    plot(cI,cabar,'bo')
+    plot(cI,cv,'ko')
+
+    legend('mean alveolar','mean arterial','venous')
+    title('Oxygen concentration vs Oxygen Concentration in Inspired Air')
+    xlabel('Oxygen Concentration of Inspired Air')
+    ylabel('Oxygen concentration')
+end

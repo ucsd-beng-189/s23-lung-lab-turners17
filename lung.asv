@@ -70,7 +70,8 @@ for beta=0:0.1:1
     ylabel('Ventilation-Perfusion Ratio')
 end
 figure(4)
- plot([0:0.1:1],betasucc,'-')
+plot([0:0.1:1],betasucc,'-')
+
 %% Task 5 
 %filename: lung.m (main program)
 
@@ -79,25 +80,34 @@ clf
 beta=0.5;
 global Pstar cstar n maxcount M Q camax RT cI;
 
-for cI=0:0.001:0.01
+cref=0.2/(22.4*(310/273));
+
+for cI=0.00325:0.0002:cref
     setup_lung
-    if(Mdiff(0,r)>0)
-            plot(beta,0)
-            break 
-        else 
-        cvsolve
-        outchecklung
-        figure(4)
-        plot(cI,PI,'ro')
-        hold on
-        plot(cI,PAbar,'go')
-        plot(cI,Pabar,'bo')
-        plot(cI,Pv,'ko')
-    end
+    cvsolve
+    outchecklung
+    figure(4)
+    plot(cI,PAbar,'go')
+    hold on
+    plot(cI,Pabar,'bo')
+    plot(cI,Pv,'ko')
+
+    legend('mean alveolar','mean arterial','venous')
+    title('Partial Pressure vs Oxygen Concentration in Inspired Air')
+    xlabel('Oxygen Concentration')
+    ylabel('Partial Pressure')
+    axis([0.0032 0.008 0 105])
+
+    figure(5)
+    plot(cI,cAbar,'go')
+    hold on
+    plot(cI,cabar,'bo')
+    plot(cI,cv,'ko')
+
+    legend('mean alveolar','mean arterial','venous')
+    title('Partial Pressure vs Oxygen Concentration in Inspired Air')
+    xlabel('Oxygen Concentration')
+    ylabel('Partial Pressure')
+    axis([0.0032 0.008 0 105])
 end
 
-legend('Concentration of Oxygen','mean alveolar','mean arterial','venous')
-title('Partial Pressure vs Oxygen Concentration')
-xlabel('Oxygen Concntration')
-ylabel('Partial Pressure')
-axis([0 0.01 0 120])
