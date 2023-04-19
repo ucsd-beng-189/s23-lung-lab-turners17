@@ -2,7 +2,7 @@
 %heterogeneity parameter (0<=beta<=1):
 %beta=0 for homogenous lung
 %beta=1 for no ventilation/perfusion correlation
-beta=0.5
+%beta=0.5
 %
 %number of iterations used in bisection:
 maxcount=20
@@ -16,7 +16,8 @@ cref=0.2/(22.4*(310/273))
 %in air at sea level at body temperature
 %
 %oxygen concentration in the inspired air:
-cI=cref
+% 
+% cI=cref
 %
 %blood oxygen concentration
 %at full hemoglobin saturation: 
@@ -64,7 +65,7 @@ VA=VAbar*(a1*beta+av*(1-beta)); % alveolar ventilation based on random distribut
 Q = Qbar*(a2*beta+av*(1-beta)); % perfustion based on random distribution a2, expected perfusion per alveolus, and heterogeneity parameter
 r=VA./Q; % ventilation perfusion ratio
 figure(1)
-plot(Q,VA,'.') % ventilation perfusion 
+plot(Q,VA,'.') % ventilation perfusion ratio
 
 %find actual values of 
 %VAtotal, Qtotal, VAbar, and Qbar:
