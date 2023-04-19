@@ -154,3 +154,47 @@ for i=1:1:31
     ylabel('Oxygen concentration')
 end
 
+%% Task 7
+%filename: lung.m (main program)
+
+clear all
+clf
+beta=0.5;
+global Pstar cstar n maxcount M Q camax RT cI;
+
+cref=0.2/(22.4*(310/273));
+cstar=(1.5)*cref;
+
+pO2=[20.9 20.1 19.4 18.6 17.9 17.3 16.6 16.0 15.4 14.8 14.3 14.3 13.7 13.2 12.7 12.3 11.8 11.4 11.0 10.5 10.1 9.7 9.4 9.0 8.7 8.4 8.1 7.8 7.5 7.2 6.9].*0.01;
+Altft=[0 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000 11000 12000 13000 14000 15000 16000 17000 18000 19000 20000 21000 22000 23000 24000 25000 26000 27000 28000 29000];
+
+for i=1:1:31
+    k=pO2(1,i);
+    cI=k/(22.4*(310/273));
+    j=Altft(i);
+    setup_lung
+    cvsolve
+    outchecklung
+    figure(4)
+    plot(j,PAbar,'go')
+    hold on
+    plot(j,Pabar,'bo')
+    plot(j,Pv,'ko')
+
+    legend('mean alveolar','mean arterial','venous')
+    title('Partial Pressure vs Altitude')
+    xlabel('Altitude (ft)')
+    ylabel('Partial Pressure')
+    
+    figure(5)
+    plot(j,cAbar,'go')
+    hold on
+    plot(j,cabar,'bo')
+    plot(j,cv,'ko')
+    crefmat=(ones([1,30])).*cref;
+    plot([0:1000:29000],crefmat,'k-')
+    legend('mean alveolar','mean arterial','venous','O2 concentration at sea level')
+    title('Oxygen concentration vs Altitude')
+    xlabel('Altitude (ft)')
+    ylabel('Oxygen concentration')
+end
