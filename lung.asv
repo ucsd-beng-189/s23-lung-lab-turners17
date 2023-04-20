@@ -308,65 +308,82 @@ end
 %% Task 9 pt 2
 %filename: lung.m (main program)
 
+beta=1;
+global Pstar cstar n maxcount M Q camax RT cI;
+
+cref=0.2/(22.4*(310/273));
+
+for cstar=cref:-0.0002:0.00325
+    setup_lung
+    cvsolve
+    outchecklung
+   
+    figure(4)
+    plot(cstar,PAbar,'go')
+    hold on
+    plot(cstar,Pabar,'bo')
+    plot(cstar,Pv,'ko')
+
+    legend('mean alveolar','mean arterial','venous')
+    title('Partial Pressure vs Blood Oxygen Concentration Beta=1')
+    xlabel('Blood Oxygen Concentration')
+    ylabel('Partial Pressure')
+
+    figure(5)
+    plot(cstar,cAbar,'go')
+    hold on
+    plot(cstar,cabar,'bo')
+    plot(cstar,cv,'ko')
+
+    crefmat=(ones([1,24])).*cref;
+    plot([0.00325:0.0002:cref],crefmat,'k-')
+    legend('mean alveolar','mean arterial','venous','O2 concentration at sea level')
+    title('Oxygen concentration vs Blood Oxygen Concentration Beta=1')
+    xlabel('Blood Oxygen Concentration')
+    ylabel('Oxygen concentration')
+end
+
+%% Task 10
+%% Task 6
+%filename: lung.m (main program)
+
 clear all
 clf
 beta=0.5;
 global Pstar cstar n maxcount M Q camax RT cI;
 
 cref=0.2/(22.4*(310/273));
-p=0;
-i=0;
-for beta=0:0.2:1
-    p=p+1;
 
-    for cstar=cref:-0.0002:0.00325
-        i=i+1:1;
-        setup_lung
-        if(Mdiff(0,r)>0)
-                break 
-        else 
-            cvsolve
-            outchecklung
-            
-            cstarstore(p,i)=cstar;
+pO2=[20.9 20.1 19.4 18.6 17.9 17.3 16.6 16.0 15.4 14.8 14.3 14.3 13.7 13.2 12.7 12.3 11.8 11.4 11.0 10.5 10.1 9.7 9.4 9.0 8.7 8.4 8.1 7.8 7.5 7.2 6.9].*0.01;
+Altft=[0 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000 11000 12000 13000 14000 15000 16000 17000 18000 19000 20000 21000 22000 23000 24000 25000 26000 27000 28000 29000];
 
-            PAbarstored(p,i)=PAbar;
-            Pabarstored(p,i)=Pabar;
-            Pvstored(p,i)=Pv;
-    
-            cAbarstored(p,i)=cAbar;
-            cabarstored(p,i)=cabar;
-            cvstored(p,i)=cv;
-        end
-    end
-end
-%%
-g=[0 0.2 0.4 0.6 0.8 1];
-for h=1:1:6
-    betaval=g(h);
-    figure (4)
-    subplot(2,3,h)
-    plot(cstarstore,PAbarstored(h,:),'g-')
+for i=1:1:31
+    k=pO2(1,i);
+    cI=k/(22.4*(310/273));
+    j=Altft(i);
+    setup_lung
+    cvsolve
+    outchecklung
+    figure(4)
+    plot(j,PAbar,'go')
     hold on
-    plot(cstar(1,[1:length(Pabarstored)]),Pabarstored(h,:),'b-')
-    plot(cstar(1,[1:length(Pvstored)]),Pvstored(h,:),'k-')
+    plot(j,Pabar,'bo')
+    plot(j,Pv,'ko')
 
     legend('mean alveolar','mean arterial','venous')
-    title(sprintf('Partial pressure vs cstar for Beta=%i', betaval))
-    xlabel('Blood O2 concnetration (cstar)')
+    title('Partial Pressure vs Altitude')
+    xlabel('Altitude (ft)')
     ylabel('Partial Pressure')
     
     figure(5)
-    subplot(2,3,h)
-    plot(cstar(1,[1:length(cAbarstored)]),cAbarstored(h,:),'g-')
+    plot(j,cAbar,'go')
     hold on
-    plot(cstar(1,[1:length(cabarstored)]),cabarstored(h,:),'b-')
-    plot(cstar(1,[1:length(cvstored)]),cvstored(h,:),'k-')
-    crefmat=(ones([1,24])).*cref;
-    plot([0.00325:0.0002:cref],crefmat,'k-')
-    legend('mean alveolar','mean arterial','venous','[O2] at sea level')
-    title(sprintf('O2 Concentration vs cstar for Beta=%i', betaval))
-    xlabel('Blood O2 concnetration (cstar)')
+    plot(j,cabar,'bo')
+    plot(j,cv,'ko')
+    crefmat=(ones([1,30])).*cref;
+    plot([0:1000:29000],crefmat,'k-')
+    legend('mean alveolar','mean arterial','venous','O2 concentration at sea level')
+    title('Oxygen concentration vs Altitude')
+    xlabel('Altitude (ft)')
     ylabel('Oxygen concentration')
-    
 end
