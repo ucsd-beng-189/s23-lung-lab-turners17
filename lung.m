@@ -265,5 +265,80 @@ for h=1:1:6
     
 end
 
+%% Task 9 pt 1
+%filename: lung.m (main program)
 
+clear all
+clf
+beta=0.5;
+global Pstar cstar n maxcount M Q camax RT cI;
 
+cref=0.2/(22.4*(310/273));
+
+for cstar=cref:-0.0002:0.00325
+    setup_lung
+    cvsolve
+    outchecklung
+   
+    figure(4)
+    plot(cstar,PAbar,'go')
+    hold on
+    plot(cstar,Pabar,'bo')
+    plot(cstar,Pv,'ko')
+
+    legend('mean alveolar','mean arterial','venous')
+    title('Partial Pressure vs Blood Oxygen Concentration')
+    xlabel('Blood Oxygen Concentration')
+    ylabel('Partial Pressure')
+
+    figure(5)
+    plot(cstar,cAbar,'go')
+    hold on
+    plot(cstar,cabar,'bo')
+    plot(cstar,cv,'ko')
+
+    crefmat=(ones([1,24])).*cref;
+    plot([0.00325:0.0002:cref],crefmat,'k-')
+    legend('mean alveolar','mean arterial','venous','O2 concentration at sea level')
+    title('Oxygen concentration vs Blood Oxygen Concentration')
+    xlabel('Blood Oxygen Concentration')
+    ylabel('Oxygen concentration')
+end
+
+%% Task 9 pt 2
+%filename: lung.m (main program)
+
+beta=1;
+global Pstar cstar n maxcount M Q camax RT cI;
+
+cref=0.2/(22.4*(310/273));
+
+for cstar=cref:-0.0002:0.00325
+    setup_lung
+    cvsolve
+    outchecklung
+   
+    figure(4)
+    plot(cstar,PAbar,'go')
+    hold on
+    plot(cstar,Pabar,'bo')
+    plot(cstar,Pv,'ko')
+
+    legend('mean alveolar','mean arterial','venous')
+    title('Partial Pressure vs Blood Oxygen Concentration Beta=1')
+    xlabel('Blood Oxygen Concentration')
+    ylabel('Partial Pressure')
+
+    figure(5)
+    plot(cstar,cAbar,'go')
+    hold on
+    plot(cstar,cabar,'bo')
+    plot(cstar,cv,'ko')
+
+    crefmat=(ones([1,24])).*cref;
+    plot([0.00325:0.0002:cref],crefmat,'k-')
+    legend('mean alveolar','mean arterial','venous','O2 concentration at sea level')
+    title('Oxygen concentration vs Blood Oxygen Concentration Beta=1')
+    xlabel('Blood Oxygen Concentration')
+    ylabel('Oxygen concentration')
+end
