@@ -7,7 +7,7 @@ setup_lung
 cvsolve
 outchecklung  
 
-%% Healthy young 
+%% Healthy Old 
 % VA vs Q plot 
 % R plot 
 % R histogram 
@@ -19,14 +19,14 @@ global Pstar cstar n maxcount M Q camax RT cI;
 dis_fac=0;
 VAr_dis=1;
 Qr_dis=1;
-beta=.02;
+beta=0.5;
 beta_d = beta/VAr_dis;
 
 setup_lung
 cvsolve
 outchecklung 
 
-%% Healthy Young 
+%% Healthy Old
 % Partial pressure vs Beta 
 
 clear all 
@@ -38,7 +38,7 @@ dis_fac=0;
 VAr_dis=1;
 Qr_dis=1;
 
-for beta=0:0.01:0.1
+for beta=0.4:0.01:0.6
     beta_d=beta/VAr_dis;
     setup_lung
     cvsolve
@@ -57,7 +57,7 @@ title('Partial Pressure vs Beta')
 xlabel('Beta')
 ylabel('Partial Pressure')
 
-%% Healhty Young 
+%% Healthy Old 
 % Partial Pressures of % Lung Affected
 
 %this is the disease factor
@@ -69,7 +69,7 @@ global Pstar cstar n maxcount M Q camax RT cI;
 
 VAr_dis=1;
 Qr_dis=1;
-beta=.02;
+beta=0.5;
 beta_d = beta/VAr_dis;
 
 for dis_fac=0:0.01:0.05
@@ -90,7 +90,7 @@ title('Partial Pressure vs Lung Affected by Disease')
 xlabel('Lung Affected by Disease')
 ylabel('Partial Pressure')
 
-%% Heathy Young 
+%% Heathy Old 
 % Partial pressure vs cstar 
 
 % comment out cstar and cref 
@@ -100,7 +100,7 @@ clf
 dis_fac=0;
 VAr_dis=1;
 Qr_dis=1;
-beta=.02;
+beta=.5;
 beta_d = beta/VAr_dis;
 
 global Pstar cstar n maxcount M Q camax RT cI;
@@ -137,10 +137,12 @@ for cstar=cref:-0.0002:0.00325
     ylabel('Oxygen concentration')
 end
 
-%% Healthy Young 
+%% Healthy Old 
 % oxygen consumption vs beta 
 
 % comment out M 
+% change axis range to be in beta range
+% change plot to be equal to the range of beta
 clear all
 clf
 global Pstar cstar n maxcount M Q camax RT cI;
@@ -148,11 +150,10 @@ global Pstar cstar n maxcount M Q camax RT cI;
 dis_fac=0;
 VAr_dis=1;
 Qr_dis=1;
-% beta=.02;
 
 qq=0;
 
-for beta=0:0.01:0.15
+for beta=0.4:0.01:0.6
     beta_d = beta/VAr_dis;
     qq=qq+1;
     for M=0:0.005:0.05
@@ -171,14 +172,14 @@ for beta=0:0.01:0.15
             title('Oxygen Consumption vs Beta')
             xlabel('Beta')
             ylabel('Oxygen Consumption')
-            axis([0 0.15 0 0.1])
+            axis([0.4 0.6 0 0.05])
         end 
     end 
 end
 figure(10)
-plot([0:0.01:0.1],betasucc,'-')
+plot([0.4:0.01:0.6],betasucc,'-')
 
-%% Healthy Young 
+%% Healthy Old 
 % O2 Partial pressure adaped to sea level 
 
 % comment out cI
@@ -188,7 +189,7 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-beta=0;
+beta=0.5;
 dis_fac=0;
 VAr_dis=1;
 Qr_dis=1;
@@ -205,7 +206,7 @@ for i=1:1:31
     setup_lung
     cvsolve
     outchecklung
-    figure(4)
+    figure(11)
     plot(j,PAbar,'go')
     hold on
     plot(j,Pabar,'bo')
@@ -216,7 +217,7 @@ for i=1:1:31
     xlabel('Altitude (ft)')
     ylabel('Partial Pressure')
     
-    figure(5)
+    figure(12)
     plot(j,cAbar,'go')
     hold on
     plot(j,cabar,'bo')
@@ -229,7 +230,7 @@ for i=1:1:31
     ylabel('Oxygen concentration')
 end
 
-%% Healthy Young 
+%% Healthy Old 
 % O2 Partial pressure adapted to high elevation 
 %RBC make up 60% of blood volume 
 
@@ -241,7 +242,7 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-beta=0;
+beta=0.5;
 dis_fac=0;
 VAr_dis=1;
 Qr_dis=1;
@@ -259,7 +260,7 @@ for i=1:1:31
     setup_lung
     cvsolve
     outchecklung
-    figure(4)
+    figure(13)
     plot(j,PAbar,'go')
     hold on
     plot(j,Pabar,'bo')
@@ -270,7 +271,7 @@ for i=1:1:31
     xlabel('Altitude (ft)')
     ylabel('Partial Pressure')
     
-    figure(5)
+    figure(14)
     plot(j,cAbar,'go')
     hold on
     plot(j,cabar,'bo')
@@ -283,10 +284,9 @@ for i=1:1:31
     ylabel('Oxygen concentration')
 end
 
-%% Healthy Young 
+%% Healthy Old 
 % O2 Partial pressure adaped to sea level with anemia
 
-% comment out cI
 % comment out cstar 
 
 clear all
@@ -294,7 +294,7 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-beta=0;
+beta=0.5;
 dis_fac=0;
 VAr_dis=1;
 Qr_dis=1;
@@ -311,7 +311,7 @@ for i=1:1:31
     setup_lung
     cvsolve
     outchecklung
-    figure(4)
+    figure(15)
     plot(j,PAbar,'go')
     hold on
     plot(j,Pabar,'bo')
@@ -322,7 +322,7 @@ for i=1:1:31
     xlabel('Altitude (ft)')
     ylabel('Partial Pressure')
     
-    figure(5)
+    figure(16)
     plot(j,cAbar,'go')
     hold on
     plot(j,cabar,'bo')
@@ -334,3 +334,17 @@ for i=1:1:31
     xlabel('Altitude (ft)')
     ylabel('Oxygen concentration')
 end
+
+
+%% Acute Asthma 
+dis_fac=0.5;
+VAr_dis=0.1;
+Qr_dis=1;
+beta=.02;
+beta_d = beta/VAr_dis;
+
+%% Severe Asthma 
+
+%% Asthma With Bronchodilator 
+
+%% COPD/ Blood Clot
