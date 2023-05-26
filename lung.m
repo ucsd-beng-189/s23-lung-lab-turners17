@@ -7,7 +7,7 @@ setup_lung
 cvsolve
 outchecklung  
 
-%% Healthy Old 
+%% Acute Asthma 
 % VA vs Q plot 
 % R plot 
 % R histogram 
@@ -16,29 +16,32 @@ outchecklung
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-dis_fac=0;
-VAr_dis=1;
+dis_fac=0.25;
+VAr_dis=0.1;
 Qr_dis=1;
-beta=0.5;
+beta=.02;
 beta_d = beta/VAr_dis;
 
 setup_lung
 cvsolve
 outchecklung 
 
-%% Healthy Old
+%% Acute Asthma
 % Partial pressure vs Beta 
+
+% comment out FIgure 1-5 for faster running 
 
 clear all 
 clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-dis_fac=0;
-VAr_dis=1;
+dis_fac=0.25;
+VAr_dis=0.1;
 Qr_dis=1;
 
-for beta=0.4:0.01:0.6
+
+for beta=0:0.1:1
     beta_d=beta/VAr_dis;
     setup_lung
     cvsolve
@@ -57,7 +60,7 @@ title('Partial Pressure vs Beta')
 xlabel('Beta')
 ylabel('Partial Pressure')
 
-%% Healthy Old 
+%% Acute Asthma 
 % Partial Pressures of % Lung Affected
 
 %this is the disease factor
@@ -67,12 +70,13 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-VAr_dis=1;
+VAr_dis=0.1;
 Qr_dis=1;
-beta=0.5;
+beta=.02;
 beta_d = beta/VAr_dis;
 
-for dis_fac=0:0.01:0.05
+
+for dis_fac=0.1:0.01:0.4
     setup_lung
     cvsolve
     outchecklung
@@ -90,17 +94,17 @@ title('Partial Pressure vs Lung Affected by Disease')
 xlabel('Lung Affected by Disease')
 ylabel('Partial Pressure')
 
-%% Heathy Old 
+%% Acute Asthma 
 % Partial pressure vs cstar 
 
 % comment out cstar and cref 
 clear all 
 clf 
 
-dis_fac=0;
-VAr_dis=1;
+dis_fac=0.25;
+VAr_dis=0.1;
 Qr_dis=1;
-beta=.5;
+beta=.02;
 beta_d = beta/VAr_dis;
 
 global Pstar cstar n maxcount M Q camax RT cI;
@@ -137,7 +141,7 @@ for cstar=cref:-0.0002:0.00325
     ylabel('Oxygen concentration')
 end
 
-%% Healthy Old 
+%% Acute Asthma 
 % oxygen consumption vs beta 
 
 % comment out M 
@@ -147,13 +151,18 @@ clear all
 clf
 global Pstar cstar n maxcount M Q camax RT cI;
 
+dis_fac=0.25;
+VAr_dis=0.1;
+Qr_dis=1;
+
+
 dis_fac=0;
 VAr_dis=1;
 Qr_dis=1;
 
 qq=0;
 
-for beta=0.4:0.01:0.6
+for beta=0:0.1:1
     beta_d = beta/VAr_dis;
     qq=qq+1;
     for M=0:0.005:0.05
@@ -172,14 +181,14 @@ for beta=0.4:0.01:0.6
             title('Oxygen Consumption vs Beta')
             xlabel('Beta')
             ylabel('Oxygen Consumption')
-            axis([0.4 0.6 0 0.05])
+            axis([0 1 0 0.05])
         end 
     end 
 end
 figure(10)
-plot([0.4:0.01:0.6],betasucc,'-')
+plot([0:0.1:1],betasucc,'-')
 
-%% Healthy Old 
+%% Acute Asthma 
 % O2 Partial pressure adaped to sea level 
 
 % comment out cI
@@ -189,11 +198,12 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-beta=0.5;
-dis_fac=0;
-VAr_dis=1;
+dis_fac=0.25;
+VAr_dis=0.1;
 Qr_dis=1;
+beta=.02;
 beta_d = beta/VAr_dis;
+
 cref=0.2/(22.4*(310/273));
 
 pO2=[20.9 20.1 19.4 18.6 17.9 17.3 16.6 16.0 15.4 14.8 14.3 14.3 13.7 13.2 12.7 12.3 11.8 11.4 11.0 10.5 10.1 9.7 9.4 9.0 8.7 8.4 8.1 7.8 7.5 7.2 6.9].*0.01;
@@ -230,7 +240,7 @@ for i=1:1:31
     ylabel('Oxygen concentration')
 end
 
-%% Healthy Old 
+%% Acute Asthma 
 % O2 Partial pressure adapted to high elevation 
 %RBC make up 60% of blood volume 
 
@@ -242,11 +252,13 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-beta=0.5;
-dis_fac=0;
-VAr_dis=1;
+
+dis_fac=0.25;
+VAr_dis=0.1;
 Qr_dis=1;
+beta=.02;
 beta_d = beta/VAr_dis;
+
 cref=0.2/(22.4*(310/273));
 cstar=1.5*cref;
 
@@ -284,7 +296,7 @@ for i=1:1:31
     ylabel('Oxygen concentration')
 end
 
-%% Healthy Old 
+%% Acute Asthma 
 % O2 Partial pressure adaped to sea level with anemia
 
 % comment out cstar 
@@ -294,11 +306,12 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-beta=0.5;
-dis_fac=0;
-VAr_dis=1;
+dis_fac=0.25;
+VAr_dis=0.1;
 Qr_dis=1;
+beta=.02;
 beta_d = beta/VAr_dis;
+
 cref=0.2/(22.4*(310/273));
 
 pO2=[20.9 20.1 19.4 18.6 17.9 17.3 16.6 16.0 15.4 14.8 14.3 14.3 13.7 13.2 12.7 12.3 11.8 11.4 11.0 10.5 10.1 9.7 9.4 9.0 8.7 8.4 8.1 7.8 7.5 7.2 6.9].*0.01;
@@ -335,16 +348,3 @@ for i=1:1:31
     ylabel('Oxygen concentration')
 end
 
-
-%% Acute Asthma 
-dis_fac=0.5;
-VAr_dis=0.1;
-Qr_dis=1;
-beta=.02;
-beta_d = beta/VAr_dis;
-
-%% Severe Asthma 
-
-%% Asthma With Bronchodilator 
-
-%% COPD/ Blood Clot

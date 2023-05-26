@@ -104,9 +104,9 @@ r=VA./Q; % ventilation perfusion ratio
 % xlabel('Value of Ventilation-Perfusion Ratio')
 % ylabel('Number of Alveoli')
 
-%find actual values of 
-%VAtotal, Qtotal, VAbar, and Qbar:
-VAtotal=sum(VA)
-Qtotal =sum(Q)
-VAbar=VAtotal/n
- Qbar= Qtotal/n
+% find actual values of 
+% VAtotal, Qtotal, VAbar, and Qbar:
+% VAtotal=sum(VA)
+% Qtotal =sum(Q)
+% VAbar=VAtotal/n
+%  Qbar= Qtotal/n
