@@ -1,15 +1,17 @@
 % filename: setup_lung.m
 %heterogeneity parameter (0<=beta<=1):
-%beta=0 for homogenous lung
+% beta=0.2 % for homogenous lung
 %beta=1 for no ventilation/perfusion correlation
-beta=0.5
+% beta=0.5
 %
 %number of iterations used in bisection:
 maxcount=20
 %
 %number of ``alveoli'':
-n=100
+n=10000
 %
+%cvzero=0.0057; % normal resting venous oxygen conentration
+
 %reference oxygen concentration (moles/liter):
 cref=0.2/(22.4*(310/273))
 %cref=concentration of oxygen 
@@ -21,7 +23,7 @@ cI=cref
 %
 %blood oxygen concentration
 %at full hemoglobin saturation: 
-cstar=cref
+% cstar=cref
 %cstar=4*(concentration of hemoglobin 
 %in blood expressed in moles/liter)
 %
@@ -58,18 +60,53 @@ VAbar=VAtotal/n
 %expected perfusion per alveolus: 
 Qbar=Qtotal/n 
 
-a1=-log(rand(n,1)); %creates vector a1 with random variables that have a mean of 1 and are exponential models ventilation in a nonrealistic way   
-a2=-log(rand(n,1)); %creates a vector a2 ""                                                                 " perfusion   "                   "    
-av=(a1+a2)/2; % mean of ventilation and perfusion           
-VA=VAbar*(a1*beta+av*(1-beta)); % alveolar ventilation based on random distribution a1, ventilation per alveolus, and heterogeneity parameter 
-Q = Qbar*(a2*beta+av*(1-beta)); % perfustion based on random distribution a2, expected perfusion per alveolus, and heterogeneity parameter
-r=VA./Q; % ventilation perfusion ratio
-figure(1)
-plot(Q,VA,'.') % ventilation perfusion ratio
+% dis_fac=0.5;
+% VAr_dis=0.1;
+% Qr_dis=1;
+% beta=.02;
+% beta_d = beta/VAr_dis;
 
-%find actual values of 
-%VAtotal, Qtotal, VAbar, and Qbar:
-VAtotal=sum(VA)
-Qtotal =sum(Q)
-VAbar=VAtotal/n
- Qbar= Qtotal/n
+n_norm=n*(1-dis_fac);
+n_dis = n*dis_fac;
+
+a1n=-log(rand(n_norm,1)); %creates vector a1 with random variables that have a mean of 1 and are exponential models ventilation in a nonrealistic way   
+a2n=-log(rand(n_norm,1)); %creates a vector a2 ""                                                                 " perfusion   "                   "    
+avn=(a1n+a2n)/2; % mean of ventilation and perfusion           
+VAn=VAbar*(a1n*beta+avn*(1-beta)); % alveolar ventilation based on random distribution a1, ventilation per alveolus, and heterogeneity parameter 
+Qn= Qbar*(a2n*beta+avn*(1-beta)); % perfustion based on random distribution a2, expected perfusion per alveolus, and heterogeneity parameter
+
+a1_d=-log(rand(n_dis,1)); %creates vector a1 with random variables that have a mean of 1 and are exponential models ventilation in a nonrealistic way   
+a2_d=-log(rand(n_dis,1)); %creates a vector a2 ""                                                                 " perfusion   "                   "    
+av_d=(a1_d+a2_d)/2; % mean of ventilation and perfusion           
+VA_d=VAr_dis*VAbar*(a1_d*beta_d+av_d*(1-beta_d)); % alveolar ventilation based on random distribution a1, ventilation per alveolus, and heterogeneity parameter 
+Q_d = Qr_dis*Qbar*(a2_d*beta_d+av_d*(1-beta_d)); % perfustion based on random distribution a2, expected perfusion per alveolus, and heterogeneity parameter
+
+VA=[VAn; VA_d];
+Q=[Qn; Q_d];
+
+
+r=VA./Q; % ventilation perfusion ratio
+% figure(1)
+% plot(Q,VA,'.') % ventilation perfusion ratio
+% title('Ventilation Perfusion Ratio')
+% ylabel('Ventilation')
+% xlabel('Perfusion')
+% 
+% figure(2)
+% plot(r,'.')
+% title('Ventilation Perfusion Ratio for each Alveoli')
+% ylabel('Value of Ventilation-Perfusion Ratio')
+% xlabel('Alveoli')
+% 
+% figure(3)
+% hist(r,[0:0.01:2])
+% title('Histogram of Ventilation Perfusion Ratio for each Alveoli')
+% xlabel('Value of Ventilation-Perfusion Ratio')
+% ylabel('Number of Alveoli')
+% 
+% %find actual values of 
+% %VAtotal, Qtotal, VAbar, and Qbar:
+% VAtotal=sum(VA)
+% Qtotal =sum(Q)
+% VAbar=VAtotal/n
+%  Qbar= Qtotal/n

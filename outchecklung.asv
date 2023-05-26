@@ -86,22 +86,22 @@ u=ones(n,1);
 cblood=[cv*u cabar*u ca];
 cair=  [cI*u cAbar*u cA];
 Pressures=[Pv*u Pabar*u PAbar*u PI*u Pa PA];
-% figure(4)
-% subplot(2,1,1),plot(r,cblood,'.')
-% title('O2 Blood Concentration vs Ventilation Perfusion Ratio')
-% xlabel('Value of Ventilation-Perfusion Ratio')
-% ylabel('O2 Blood Concentrations')
-% legend('Venous', 'Mean Arterial','Individual Arterial')
-% 
-% subplot(2,1,2),plot(r,cair  ,'.')
-% title('O2 Air Concentration vs Ventilation Perfusion Ratio')
-% xlabel('Value of Ventilation-Perfusion Ratio')
-% ylabel('O2 Air Concentrations')
-% legend('Inspired', 'Mean Alveolar','Individual Alveoli')
-% 
-% figure(5)
-% plot(r,Pressures,'.')
-% title('O2 Partial Pressures vs Ventilation Perfusion Ratio')
-% xlabel('Value of Ventilation-Perfusion Ratio')
-% ylabel('O2 Partial Pressures')
-% legend('Venous Blood', 'Mean Arterial Blood','Mean Alveolar Air', 'Inspired Air', 'Arterial Blood', 'Alveolar Air')
+figure(4)
+subplot(2,1,1),plot(r,cblood,'.')
+title('O2 Blood Concentration vs Ventilation Perfusion Ratio')
+xlabel('Value of Ventilation-Perfusion Ratio')
+ylabel('O2 Blood Concentrations')
+legend('Venous', 'Mean Arterial','Individual Arterial')
+
+subplot(2,1,2),plot(r,cair  ,'.')
+title('O2 Air Concentration vs Ventilation Perfusion Ratio')
+xlabel('Value of Ventilation-Perfusion Ratio')
+ylabel('O2 Air Concentrations')
+legend('Inspired', 'Mean Alveolar','Individual Alveoli')
+
+figure(5)
+plot(r,Pressures,'.')
+title('O2 Partial Pressures vs Ventilation Perfusion Ratio')
+xlabel('Value of Ventilation-Perfusion Ratio')
+ylabel('Blood Concentrations')
+legend('venous blood', 'mean arterial','arterial blood')
