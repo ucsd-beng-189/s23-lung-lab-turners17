@@ -13,13 +13,13 @@ n=10000
 %cvzero=0.0057; % normal resting venous oxygen conentration
 
 %reference oxygen concentration (moles/liter):
-cref=0.2/(22.4*(310/273))
+ cref=0.2/(22.4*(310/273))
 %cref=concentration of oxygen 
 %in air at sea level at body temperature
 %
 %oxygen concentration in the inspired air:
 % 
-cI=cref
+ cI=cref
 %
 %blood oxygen concentration
 %at full hemoglobin saturation: 
@@ -103,10 +103,10 @@ r=VA./Q; % ventilation perfusion ratio
 % title('Histogram of Ventilation Perfusion Ratio for each Alveoli')
 % xlabel('Value of Ventilation-Perfusion Ratio')
 % ylabel('Number of Alveoli')
-% 
-% % find actual values of 
-% % VAtotal, Qtotal, VAbar, and Qbar:
-% % VAtotal=sum(VA)
-% % Qtotal =sum(Q)
-% % VAbar=VAtotal/n
-% %  Qbar= Qtotal/n
+% % 
+% % % find actual values of 
+% % % VAtotal, Qtotal, VAbar, and Qbar:
+% % % VAtotal=sum(VA)
+% % % Qtotal =sum(Q)
+% % % VAbar=VAtotal/n
+% % %  Qbar= Qtotal/n

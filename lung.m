@@ -7,7 +7,7 @@ setup_lung
 cvsolve
 outchecklung  
 
-%% Severe Asthma  
+%% Acute Asthma With Bronchodilator  
 % VA vs Q plot 
 % R plot 
 % R histogram 
@@ -16,17 +16,17 @@ outchecklung
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-dis_fac=0.5;
-VAr_dis=0.1;
-Qr_dis=1;
-beta=.02;
+dis_fac=0.25;
+VAr_dis=1;
+Qr_dis=1/0.1;
+beta=.1;
 beta_d = beta/VAr_dis;
 
 setup_lung
 cvsolve
 outchecklung 
 
-%% Severe Asthma 
+%% Acute Asthma With Bronchodilator 
 % Partial pressure vs Beta 
 
 % comment out FIgure 1-5 for faster running 
@@ -36,10 +36,9 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-dis_fac=0.5;
-VAr_dis=0.1;
-Qr_dis=1;
-
+dis_fac=0.25;
+VAr_dis=1;
+Qr_dis=1/0.1;
 
 for beta=0:0.1:1
     beta_d=beta/VAr_dis;
@@ -64,7 +63,7 @@ title('Partial Pressure vs Beta')
 xlabel('Beta')
 ylabel('Partial Pressure')
 
-%% Severe Asthma  
+%% Acute Asthma With Bronchodilator  
 % Partial Pressures of % Lung Affected
 
 %this is the disease factor
@@ -74,13 +73,13 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-VAr_dis=0.1;
-Qr_dis=1;
-beta=.02;
+VAr_dis=1;
+Qr_dis=1/0.1;
+beta=.1;
 beta_d = beta/VAr_dis;
 
 
-for dis_fac=0.5:0.01:0.9
+for dis_fac=0.1:0.01:0.4
     setup_lung
     
     cvsolve
@@ -99,17 +98,17 @@ title('Partial Pressure vs Lung Affected by Disease')
 xlabel('Lung Affected by Disease')
 ylabel('Partial Pressure')
 
-%% Severe Asthma  
+%% Acute Asthma With Bronchodilator  
 % Partial pressure vs cstar 
 
 % comment out cstar and cref 
 clear all 
 clf 
 
-dis_fac=0.5;
-VAr_dis=0.1;
-Qr_dis=1;
-beta=.02;
+dis_fac=0.25;
+VAr_dis=1;
+Qr_dis=1/0.1;
+beta=.1;
 beta_d = beta/VAr_dis;
 
 global Pstar cstar n maxcount M Q camax RT cI;
@@ -146,7 +145,7 @@ for cstar=cref:-0.0002:0.00325
     ylabel('Oxygen concentration')
 end
 
-%% Severe Asthma  
+%% Acute Asthma With Bronchodilator  
 % oxygen consumption vs beta 
 
 % comment out M 
@@ -156,9 +155,9 @@ clear all
 clf
 global Pstar cstar n maxcount M Q camax RT cI;
 
-dis_fac=0.5;
-VAr_dis=0.1;
-Qr_dis=1;
+dis_fac=0.25;
+VAr_dis=1;
+Qr_dis=1/0.1;
 
 qq=0;
 
@@ -188,7 +187,7 @@ end
 figure(10)
 plot([0:0.1:1],betasucc,'-')
 
-%% Severe Asthma  
+%% Acute Asthma With Bronchodilator  
 % O2 Partial pressure adaped to sea level 
 
 % comment out cI
@@ -198,10 +197,10 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-dis_fac=0.5;
-VAr_dis=0.1;
-Qr_dis=1;
-beta=.02;
+dis_fac=0.25;
+VAr_dis=1;
+Qr_dis=1/0.1;
+beta=.1;
 beta_d = beta/VAr_dis;
 
 cref=0.2/(22.4*(310/273));
@@ -240,7 +239,7 @@ for i=1:1:31
     ylabel('Oxygen concentration')
 end
 
-%% Severe Asthma  
+%% Acute Asthma With Bronchodilator  
 % O2 Partial pressure adapted to high elevation 
 %RBC make up 60% of blood volume 
 
@@ -252,11 +251,10 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-
-dis_fac=0.5;
-VAr_dis=0.1;
-Qr_dis=1;
-beta=.02;
+dis_fac=0.25;
+VAr_dis=1;
+Qr_dis=1/0.1;
+beta=.1;
 beta_d = beta/VAr_dis;
 
 cref=0.2/(22.4*(310/273));
@@ -296,7 +294,7 @@ for i=1:1:31
     ylabel('Oxygen concentration')
 end
 
-%% Severe Asthma 
+%% Acute Asthma With Bronchodilator 
 % O2 Partial pressure adaped to sea level with anemia
 
 % comment out cstar 
@@ -306,10 +304,10 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-dis_fac=0.5;
-VAr_dis=0.1;
-Qr_dis=1;
-beta=.02;
+dis_fac=0.25;
+VAr_dis=1;
+Qr_dis=1/0.1;
+beta=.1;
 beta_d = beta/VAr_dis;
 
 cref=0.2/(22.4*(310/273));
@@ -347,3 +345,6 @@ for i=1:1:31
     xlabel('Altitude (ft)')
     ylabel('Oxygen concentration')
 end
+ 
+
+%% COPD/ Blood Clot
