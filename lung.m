@@ -76,7 +76,7 @@ global Pstar cstar n maxcount M Q camax RT cI;
 
 VAr_dis=1;
 Qr_dis=1;
-beta=0;
+beta=0.5;
 beta_d = beta/VAr_dis;
 
 
