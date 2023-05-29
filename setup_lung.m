@@ -23,7 +23,7 @@ n=10000
 %
 %blood oxygen concentration
 %at full hemoglobin saturation: 
-% cstar=cref
+ cstar=cref
 %cstar=4*(concentration of hemoglobin 
 %in blood expressed in moles/liter)
 %
@@ -67,7 +67,10 @@ Qbar=Qtotal/n
 % beta_d = beta/VAr_dis;
 
 n_norm=n*(1-dis_fac);
+n_norm=round(n_norm); 
+
 n_dis = n*dis_fac;
+n_dis=round(n_dis);
 
 a1n=-log(rand(n_norm,1)); %creates vector a1 with random variables that have a mean of 1 and are exponential models ventilation in a nonrealistic way   
 a2n=-log(rand(n_norm,1)); %creates a vector a2 ""                                                                 " perfusion   "                   "    
@@ -97,16 +100,18 @@ r=VA./Q; % ventilation perfusion ratio
 % title('Ventilation Perfusion Ratio for each Alveoli')
 % ylabel('Value of Ventilation-Perfusion Ratio')
 % xlabel('Alveoli')
-% 
+% axis([0 10000 0 1])
 % figure(3)
-% hist(r,[0:0.01:2])
+% 
+% hist(r,[0:0.01:3])
 % title('Histogram of Ventilation Perfusion Ratio for each Alveoli')
 % xlabel('Value of Ventilation-Perfusion Ratio')
 % ylabel('Number of Alveoli')
-% % 
-% % % find actual values of 
-% % % VAtotal, Qtotal, VAbar, and Qbar:
-% % % VAtotal=sum(VA)
-% % % Qtotal =sum(Q)
-% % % VAbar=VAtotal/n
-% % %  Qbar= Qtotal/n
+% axis([0 3 0 140])
+% % % 
+% % % % find actual values of 
+% % % % VAtotal, Qtotal, VAbar, and Qbar:
+% % % % VAtotal=sum(VA)
+% % % % Qtotal =sum(Q)
+% % % % VAbar=VAtotal/n
+% % % %  Qbar= Qtotal/n
