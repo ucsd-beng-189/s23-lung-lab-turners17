@@ -74,9 +74,9 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-VAr_dis=0.1;
-Qr_dis=1;
-beta=0.02;
+VAr_dis=1;
+Qr_dis=1/0.1;
+beta=0.1;
 beta_d = beta/VAr_dis;
 
 
