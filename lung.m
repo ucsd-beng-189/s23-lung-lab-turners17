@@ -74,15 +74,17 @@ clf
 
 global Pstar cstar n maxcount M Q camax RT cI;
 
-VAr_dis=1;
+VAr_dis=0.1;
 Qr_dis=1;
-beta=0.5;
+beta=0.02;
 beta_d = beta/VAr_dis;
 
 
 for dis_fac=0:0.1:1
     setup_lung
-    
+    if(Mdiff(0,r)>0)
+            break 
+        else 
     cvsolve
     outchecklung
    
@@ -92,13 +94,13 @@ for dis_fac=0:0.1:1
     plot(dis_fac,PAbar,'go')
     plot(dis_fac,Pabar,'bo')
     plot(dis_fac,Pv,'ko')
-end
-
+    end
+    end
 legend('Inspired','Mean Alveolar','Mean Arterial','Venous')
 title('Partial Pressure vs Lung Affected by Disease')
 xlabel('Lung Affected by Disease')
 ylabel('Partial Pressure')
-
+axis([0 1 0 160])
 %%   
 % Partial pressure vs cstar 
 
